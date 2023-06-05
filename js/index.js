@@ -13,24 +13,28 @@ function storingData(event) {
   var assignTo = document.getElementById('assign').value;
   var dueDate = document.getElementById('date').value;
 
-
-  // if (taskName.trim() === '' || taskDescription.trim() === '' || assignTo.trim() === '' || dueDate.trim() === '' || taskstatus === "") {
-  //   alert('Please fill in all the required fields.');
-  //   return;
-  // }
-
-  // if (taskName.split(' ').length > 200) {
-  //   alert('Message exceeds the word limit of 200 words.');
-  //   return;
-  // }
-
-
+  if (taskName.length < 8){
+    document.getElementById('taskError').innerHTML = "Please enter more than 8 characters"
+    return;
+  }
+  if (taskDescription.length < 8 || taskDescription.length > 30 ){
+    document.getElementById('descriptionError').innerHTML = "Please enter between  8-30 characters"
+    return;
+  }
+  if (dueDate.valueOf() =='' ){
+    document.getElementById('dateError').innerHTML = "Please pick a date"
+    return;
+  } else{
+    document.getElementById('dateError').innerHTML ='';
+    document.getElementById('descriptionError').innerHTML = '';
+    document.getElementById('taskError').innerHTML = '';
+  }
 
   var taskstatus
 
   for (var i = 0; i < status.length; i++) {
-    if (status[i].checked) {
-      taskstatus = status[i].value;
+    if ([i].checked) {
+      taskstatus = [i].value;
       break;
     }
   }
@@ -102,30 +106,30 @@ function resetForm() {
 }
 
 
-// vlidate on keyon when type 
-let taskError = document.getElementById('taskError');
-let descriptionError = document.getElementById('descriptionError');
-let dateError = document.getElementById('dateError');
+// // vlidate on keyon when type 
+// let taskError = document.getElementById('taskError');
+// let descriptionError = document.getElementById('descriptionError');
+// let dateError = document.getElementById('dateError');
 
-function validateName(){
-  let name1 = document.getElementById('name').value;
+// function validateName(){
+//   let name1 = document.getElementById('name').value;
 
-  if (name1.length < 10){
-    taskError.innerHTML = "Please enter more than 10 characters"
-    return false;
-  }
-  taskError.innerHTML = 'valid';
-  return true;
-}
+//   if (name1.length < 10){
+//     taskError.innerHTML = "Please enter more than 10 characters"
+//     return false;
+//   }
+//   taskError.innerHTML = 'valid';
+//   return true;
+// }
 
 
-function validateDescription(){
-  let description1 = document.getElementById('description').value;
+// function validateDescription(){
+//   let description1 = document.getElementById('description').value;
   
-  if (description1.length < 20){
-    descriptionError.innerHTML = "Please enter more than 20 characters"
-    return false;
-  }
-  descriptionError.innerHTML = 'valid';
-  return true;
-}
+//   if (description1.length < 20){
+//     descriptionError.innerHTML = "Please enter more than 20 characters"
+//     return false;
+//   }
+//   descriptionError.innerHTML = 'valid';
+//   return true;
+// }
