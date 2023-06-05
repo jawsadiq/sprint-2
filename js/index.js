@@ -24,6 +24,7 @@ function storingData(event) {
   if (dueDate.valueOf() =='' ){
     document.getElementById('dateError').innerHTML = "Please pick a date"
     return;
+    
   } else{
     document.getElementById('dateError').innerHTML ='';
     document.getElementById('descriptionError').innerHTML = '';
