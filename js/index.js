@@ -60,7 +60,7 @@ function storingData(event) {
     let newUserhtml = `
       <div class="col col-xs-12 col-sm-12 col-md-4 col-lg-4">
         <div class="card m-auto text-white bg-success mb-3" style="max-width: 18rem;">
-          <div class="card-header">Task 1</div>
+          
             <div id = "storingData" class="card-body">
               <p class="card-text">Name: ${task.name}</p>
               <p class="card-text">Description: ${task.description}</p>
