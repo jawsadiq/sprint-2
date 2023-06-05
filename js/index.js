@@ -12,7 +12,7 @@ function storingData(event) {
   var taskDescription = document.getElementById('description').value;
   var assignTo = document.getElementById('assign').value;
   var dueDate = document.getElementById('date').value;
-  var status = document.getElementsByName('status');
+
 
   // if (taskName.trim() === '' || taskDescription.trim() === '' || assignTo.trim() === '' || dueDate.trim() === '' || taskstatus === "") {
   //   alert('Please fill in all the required fields.');
@@ -26,7 +26,6 @@ function storingData(event) {
 
 
 
-  
   var taskstatus
 
   for (var i = 0; i < status.length; i++) {
@@ -68,11 +67,13 @@ function storingData(event) {
               <p class="card-text">Assigned to: ${task.assign}</p>
               <p class="card-text">Due Date: ${task.date}</p>
               <p class="card-text">Status: ${task.status}</p>
-              <button class="delete-button btn btn-danger btn-sm" name="delete" id="deleteBtn">DELETE</button>
+              <button class="delete-button btn btn-danger btn-sm" name="delete" id="deleteBtn" onclick="return this.parentNode.remove();">DELETE</button>
             </div>
         </div>
       </div>`
+    
     taskParent.innerHTML += newUserhtml;
+    
   }
 
 }
@@ -100,3 +101,31 @@ function resetForm() {
   document.getElementById("userForm").reset();
 }
 
+
+// vlidate on keyon when type 
+let taskError = document.getElementById('taskError');
+let descriptionError = document.getElementById('descriptionError');
+let dateError = document.getElementById('dateError');
+
+function validateName(){
+  let name1 = document.getElementById('name').value;
+
+  if (name1.length < 10){
+    taskError.innerHTML = "Please enter more than 10 characters"
+    return false;
+  }
+  taskError.innerHTML = 'valid';
+  return true;
+}
+
+
+function validateDescription(){
+  let description1 = document.getElementById('description').value;
+  
+  if (description1.length < 20){
+    descriptionError.innerHTML = "Please enter more than 20 characters"
+    return false;
+  }
+  descriptionError.innerHTML = 'valid';
+  return true;
+}
