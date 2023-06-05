@@ -1,7 +1,7 @@
-var stroringData = [
-]
+var stroringData = [];
 
 var form = document.getElementById('userForm');
+let taskParent = document.querySelector("#taskParent");
 
 form.addEventListener('submit', storingData)
 
@@ -52,37 +52,46 @@ function storingData(event) {
   stroringData.push(userInput);
 
   form.reset();
+  renderTasks();
+};
 
-
-  console.log(stroringData);
-
-  let taskParent = document.querySelector("#taskParent");
-  taskParent.innerHTML = "";
-  for (var i = 0; i < stroringData.length; i++) {
-
-    var task = stroringData[i];
-
-    let newUserhtml = `
-      <div class="col col-xs-12 col-sm-12 col-md-4 col-lg-4">
+  function renderTasks() {
+    taskParent.innerHTML = "";
+    for (var i = 0; i < stroringData.length; i++) {
+      var id = i;
+      var task = stroringData[i];
+      let newUserhtml = `
+        <div class="col col-xs-12 col-sm-12 col-md-4 col-lg-4">
         <div class="card m-auto text-white bg-success mb-3" style="max-width: 18rem;">
-          
-            <div id = "storingData" class="card-body">
-              <p class="card-text">Name: ${task.name}</p>
-              <p class="card-text">Description: ${task.description}</p>
-              <p class="card-text">Assigned to: ${task.assign}</p>
-              <p class="card-text">Due Date: ${task.date}</p>
-              <p class="card-text">Status: ${task.status}</p>
-              <button class="delete-button btn btn-danger btn-sm" name="delete" id="deleteBtn" onclick="return this.parentNode.remove();">DELETE</button>
-            </div>
+          <div class="card-header">Task ${id+1}</div>
+          <div id = "storingData" class="card-body">
+            
+            <p class="card-text">Name: ${task.name}</p>
+            <p class="card-text">Description: ${task.description}</p>
+            <p class="card-text">Assigned to: ${task.assign}</p>
+            <p class="card-text">Due Date: ${task.date}</p>
+            <p class="card-text">Status: ${task.status}</p>
+            <button class="delete-button btn btn-danger btn-sm" data-task-id="${id}">DELETE</button>
+            
+  
+          </div>
         </div>
-      </div>`
-    
-    taskParent.innerHTML += newUserhtml;
-    
+      </div>
+        `
+  
+      taskParent.innerHTML += newUserhtml;
+    }
+    var deleteButtons = document.getElementsByClassName("delete-button");
+    for (var i = 0; i < deleteButtons.length; i++) {
+      deleteButtons[i].addEventListener('click', deleteTask);
+    }
   }
-
-}
-
+  
+  function deleteTask(event) {
+    var taskId = event.target.getAttribute("data-task-id");
+    stroringData.splice(taskId, 1);
+    renderTasks();
+  }
 
 // date and time function 
 const dateElement = document.querySelector("#showDate");
@@ -106,7 +115,7 @@ function resetForm() {
   document.getElementById("userForm").reset();
 }
 
-
+renderTasks();
 // // vlidate on keyon when type 
 // let taskError = document.getElementById('taskError');
 // let descriptionError = document.getElementById('descriptionError');
